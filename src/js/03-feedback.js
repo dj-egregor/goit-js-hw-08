@@ -23,8 +23,9 @@ const key = 'feedback-form-state';
 const formEl = document.querySelector('form.feedback-form');
 
 function updateFormData() {
-  formEl.elements.email.value = load(key).email || '';
-  formEl.elements.message.value = load(key).message || '';
+  formEl.elements.email.value = load(key) !== undefined ? load(key).email : '';
+  formEl.elements.message.value =
+    load(key) !== undefined ? load(key).message : '';
 }
 
 function saveTextFormData(event) {
