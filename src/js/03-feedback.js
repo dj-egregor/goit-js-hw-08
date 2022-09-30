@@ -23,14 +23,13 @@ const key = 'feedback-form-state';
 const formEl = document.querySelector('form.feedback-form');
 
 function updateFormData() {
-  formEl.elements.email.value = load(key) !== undefined ? load(key).email : '';
-  formEl.elements.message.value =
-    load(key) !== undefined ? load(key).message : '';
+  formEl.elements.email.value = load(key) ? load(key).email : '';
+  formEl.elements.message.value = load(key) ? load(key).message : '';
 }
 
 function saveTextFormData(event) {
-  const email = formEl.elements.email.value;
-  const message = formEl.elements.message.value;
+  const email = formEl.elements.email.value.trim();
+  const message = formEl.elements.message.value.trim();
   save('feedback-form-state', { email: email, message: message });
 }
 
@@ -40,7 +39,7 @@ function submitForm(event) {
   const message = formEl.elements.message.value;
   console.log({ email: email, message: message });
   formEl.reset();
-  localStorage.clear();
+  localStorage.removeItem(key);
 }
 
 updateFormData();
